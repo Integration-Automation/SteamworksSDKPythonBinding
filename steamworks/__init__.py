@@ -41,7 +41,7 @@ class STEAMWORKS(object):
     _arch = steamworks_util.get_arch()
     _native_supported_platforms = ['linux', 'linux2', 'darwin', 'win32']
 
-    def __init__(self, supported_platforms: list) -> None:
+    def __init__(self, supported_platforms: list = None) -> None:
         self._supported_platforms = supported_platforms or []
         self._loaded = False
         self._cdll = None
@@ -51,7 +51,7 @@ class STEAMWORKS(object):
         self._initialize()
 
     def _initialize(self) -> bool:
-        """Initialize module by loading STEAMWORKS library
+        """Initialize module by loading STEAMWORKS c_library
 
         :return: bool
         """
@@ -64,19 +64,19 @@ class STEAMWORKS(object):
 
         library_file_name = ''
         if platform in ['linux', 'linux2']:
-            library_file_name = 'SteamworksPy.so'
+            library_file_name = 'SteamAPI.so'
             if os.path.isfile(os.path.join(os.getcwd(), 'libsteam_api.so')):
                 cdll.LoadLibrary(os.path.join(os.getcwd(), 'libsteam_api.so'))  # if i do this then linux works
             elif os.path.isfile(os.path.join(os.path.dirname(__file__), 'libsteam_api.so')):
                 cdll.LoadLibrary(os.path.join(os.path.dirname(__file__), 'libsteam_api.so'))
             else:
-                raise MissingSteamworksLibraryException(f'Missing library "libsteam_api.so"')
+                raise MissingSteamworksLibraryException(f'Missing c_library "libsteam_api.so"')
 
         elif platform == 'darwin':
-            library_file_name = 'SteamworksPy.dylib'
+            library_file_name = 'SteamAPI.dylib'
 
         elif platform == 'win32':
-            library_file_name = 'SteamworksPy.dll' if STEAMWORKS._arch == Arch.x86 else 'SteamworksPy64.dll'
+            library_file_name = 'SteamAPI64.dll' if STEAMWORKS._arch == Arch.x86 else 'SteamAPI64.dll'
 
         else:
             # This case is theoretically unreachable
@@ -87,7 +87,7 @@ class STEAMWORKS(object):
         elif os.path.isfile(os.path.join(os.path.dirname(__file__), library_file_name)):
             library_path = os.path.join(os.path.dirname(__file__), library_file_name)
         else:
-            raise MissingSteamworksLibraryException(f'Missing library {library_file_name}')
+            raise MissingSteamworksLibraryException(f'Missing c_library {library_file_name}')
 
         app_id_file = os.path.join(os.getcwd(), 'steam_appid.txt')
         if not os.path.isfile(app_id_file):
@@ -182,7 +182,7 @@ class STEAMWORKS(object):
         self._cdll = None
 
     def loaded(self) -> bool:
-        """Is library loaded and everything populated
+        """Is c_library loaded and everything populated
 
         :return: bool
         """

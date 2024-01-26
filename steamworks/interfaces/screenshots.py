@@ -8,7 +8,7 @@ class SteamScreenshots(object):
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
     def AddScreenshotToLibrary(self, filename: str, thumbnail_filename: str, width: int, height: int) -> int:
-        """Adds a screenshot to the user's Steam screenshot library from disk
+        """Adds a screenshot to the user's Steam screenshot c_library from disk
 
         :param filename: str
         :param thumbnail_filename: str

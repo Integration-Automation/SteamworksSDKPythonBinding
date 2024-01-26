@@ -1441,6 +1441,186 @@ SW_PY void Workshop_SuspendDownloads(bool bSuspend) {
     }
     SteamUGC()->SuspendDownloads(bSuspend);
 }
+//-----------------------------------------------
+// Steam UGCQuery
+//-----------------------------------------------
+SW_PY UGCQueryHandle_t CreateQueryAllUGCRequest(
+        EUGCQuery eQueryType, EUGCMatchingUGCType eMatchingeMatchingUGCTypeFileType,
+        AppId_t nCreatorAppID, AppId_t nConsumerAppID, uint32 unPage ) {
+    return SteamUGC()->CreateQueryAllUGCRequest(eQueryType, eMatchingeMatchingUGCTypeFileType,
+                                                nCreatorAppID, nConsumerAppID, unPage);
+}
+
+SW_PY UGCQueryHandle_t CreateQueryUGCDetailsRequest(
+        PublishedFileId_t *pvecPublishedFileID, uint32 unNumPublishedFileIDs) {
+    return SteamUGC()->CreateQueryUGCDetailsRequest(pvecPublishedFileID, unNumPublishedFileIDs);
+}
+
+SW_PY UGCQueryHandle_t CreateQueryUserUGCRequest(
+        AccountID_t unAccountID, EUserUGCList eListType, EUGCMatchingUGCType eMatchingUGCType,
+        EUserUGCListSortOrder eSortOrder, AppId_t nCreatorAppID, AppId_t nConsumerAppID, uint32 unPage ) {
+    return SteamUGC()->CreateQueryUserUGCRequest(unAccountID, eListType, eMatchingUGCType,
+                                                 eSortOrder, nCreatorAppID, nConsumerAppID, unPage);
+}
+
+SW_PY bool SetCloudFileNameFilter(UGCQueryHandle_t handle, const char *pMatchCloudFileName) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetCloudFileNameFilter(handle, pMatchCloudFileName);
+}
+
+SW_PY bool SetSearchText(UGCQueryHandle_t handle, const char *pSearchText) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetSearchText(handle, pSearchText);
+}
+
+SW_PY bool SetRankedByTrendDays(UGCQueryHandle_t handle, uint32 unDays) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetRankedByTrendDays(handle, unDays);
+}
+
+SW_PY bool SetMatchAnyTag(UGCQueryHandle_t handle, bool bMatchAnyTag) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetMatchAnyTag(handle, bMatchAnyTag);
+}
+
+SW_PY bool AddRequiredTag(UGCQueryHandle_t handle, const char *pTagName) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->AddRequiredTag(handle, pTagName);
+}
+
+SW_PY bool AddExcludedTag(UGCQueryHandle_t handle, const char *pTagName) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->AddExcludedTag(handle, pTagName);
+}
+
+SW_PY bool AddRequiredKeyValueTag(UGCQueryHandle_t handle, const char *pKey, const char *pValue) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->AddRequiredKeyValueTag(handle, pKey, pValue);
+}
+
+SW_PY bool SetReturnOnlyIDs(UGCQueryHandle_t handle, bool bReturnOnlyIDs) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnOnlyIDs(handle, bReturnOnlyIDs);
+}
+
+SW_PY bool SetReturnKeyValueTags(UGCQueryHandle_t handle, bool bReturnKeyValueTags) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnKeyValueTags(handle, bReturnKeyValueTags);
+}
+
+SW_PY bool SetReturnLongDescription(UGCQueryHandle_t handle, bool bReturnLongDescription) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnLongDescription(handle, bReturnLongDescription);
+}
+
+SW_PY bool SetReturnMetadata(UGCQueryHandle_t handle, bool bReturnMetadata) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnMetadata(handle, bReturnMetadata);
+}
+
+SW_PY bool SetReturnChildren(UGCQueryHandle_t handle, bool bReturnChildren) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnChildren(handle, bReturnChildren);
+}
+
+SW_PY bool SetReturnAdditionalPreviews(UGCQueryHandle_t handle, bool bReturnAdditionalPreviews) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnAdditionalPreviews(handle, bReturnAdditionalPreviews);
+}
+
+SW_PY bool SetReturnTotalOnly(UGCQueryHandle_t handle, bool bReturnTotalOnly) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetReturnAdditionalPreviews(handle, bReturnTotalOnly);
+}
+
+SW_PY bool SetLanguage(UGCQueryHandle_t handle, const char *pchLanguage) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetLanguage(handle, pchLanguage);
+}
+
+SW_PY bool SetAllowCachedResponse(UGCQueryHandle_t handle, uint32 unMaxAgeSeconds) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetAllowCachedResponse(handle, unMaxAgeSeconds);
+}
+
+
+SW_PY SteamAPICall_t SendQueryUGCRequest(UGCQueryHandle_t handle) {
+    return SteamUGC()->SendQueryUGCRequest(handle);
+}
+
+SW_PY bool GetQueryUGCResult(UGCQueryHandle_t handle, uint32 index, SteamUGCDetails_t *pDetails) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCResult(handle, index, pDetails);
+}
+
+SW_PY bool ReleaseQueryUGCRequest(UGCQueryHandle_t handle ) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->ReleaseQueryUGCRequest(handle);
+}
+
+SW_PY bool GetQueryUGCPreviewURL(UGCQueryHandle_t handle, uint32 index, char *pchURL, uint32 cchURLSize) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCPreviewURL(handle, index, pchURL, cchURLSize);
+}
+
+SW_PY bool GetQueryUGCMetadata(UGCQueryHandle_t handle, uint32 index, char *pchMetadata, uint32 cchMetadatasize) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCMetadata(handle, index, pchMetadata, cchMetadatasize);
+}
+
+SW_PY bool GetQueryUGCChildren(UGCQueryHandle_t handle, uint32 index, PublishedFileId_t*pvecPublishedFileID, uint32 cMaxEntries) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCChildren(handle, index, pvecPublishedFileID, cMaxEntries);
+}
+
+SW_PY bool GetQueryUGCStatistic(UGCQueryHandle_t handle, uint32 index, EItemStatistic eStatType, uint64 *pStatValue) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCStatistic(handle, index, eStatType, pStatValue);
+}
 
 //-----------------------------------------------
 // Steam Leaderboard

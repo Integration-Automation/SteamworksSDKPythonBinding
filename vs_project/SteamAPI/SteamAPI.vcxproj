@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Users\zenma\Downloads\steamworks_sdk_158a\sdk\public\steam\steam_api.h" />
+    <ClCompile Include="..\..\c_library\steam_api.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Python\SteamWorkshopAPI\c_library\steam_api.cpp" />
+    <ClInclude Include="..\..\c_library\steam_api.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

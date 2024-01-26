@@ -10,3 +10,8 @@
 * Under Linker > Input, add steam_api.lib or steam_api64.lib to Additional Dependenices.
 * You may also want to add _CRT_SECURE_NO_WARNINGS under C/C++ > Preprocessor > Preprocessor Definitions.
 * Clean and build.
+
+# Requirements
+* steam_appid.txt - Stating your games app id or any other valid app id given the account owns a license
+* steam_api library (.dll) and the corresponding steam_api.lib
+* SteamworksPy library (.dll)

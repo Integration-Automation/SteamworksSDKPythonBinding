@@ -1,0 +1,1 @@
+C:\CodeWorkspace\Python\SteamWorkshopAPI\vs_project\SteamAPI\x64\Debug\SteamAPI.dll

@@ -11,7 +11,7 @@ class SteamMicroTxn(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def SetAuthorizationResponseCallback(self, callback: object) -> bool:
+    def set_authorization_response_callback(self, callback: object) -> bool:
         """Set callback for when Steam informs about the consent flow result
 
         :param callback: callable

@@ -77,7 +77,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>"C:\Users\zenma\Downloads\steamworks_sdk_158a\sdk\redistributable_bin\win64\steam_api64.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>C:\CodeWorkspace\Python\SteamWorkshopAPI\tests\manual\steam_api64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

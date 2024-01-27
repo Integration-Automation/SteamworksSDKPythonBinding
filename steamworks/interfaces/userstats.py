@@ -11,7 +11,7 @@ class SteamUserStats(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def GetAchievement(self, name: str) -> bool:
+    def get_achievement(self, name: str) -> bool:
         """Return true/false if use has given achievement
 
         :param name: str
@@ -19,14 +19,14 @@ class SteamUserStats(object):
         """
         return self.steam.GetAchievement(name)
 
-    def GetNumAchievements(self) -> int:
+    def get_num_achievements(self) -> int:
         """Get the number of achievements defined in the App Admin panel of the Steamworks website.
 
         :return: int
         """
         return self.steam.GetNumAchievements()
 
-    def GetAchievementName(self, index: int) -> str:
+    def get_achievement_name(self, index: int) -> str:
         """Gets the 'API name' for an achievement index between 0 and GetNumAchievements.
 
         :param index: int
@@ -34,7 +34,7 @@ class SteamUserStats(object):
         """
         return self.steam.GetAchievementName(index)
 
-    def GetAchievementDisplayAttribute(self, name: str, key: str) -> str:
+    def get_achievement_display_attribute(self, name: str, key: str) -> str:
         """Get general attributes for an achievement. Currently provides: Name, Description, and Hidden status.
 
         :param name: str
@@ -43,7 +43,7 @@ class SteamUserStats(object):
         """
         return self.steam.GetAchievementDisplayAttribute(name, key)
 
-    def GetStatFloat(self, name: str) -> float:
+    def get_stat_float(self, name: str) -> float:
         """Get the value of a float statistic
 
         :param name: str
@@ -51,7 +51,7 @@ class SteamUserStats(object):
         """
         return self.steam.GetStatFloat(name)
 
-    def GetStatInt(self, name: str) -> float:
+    def get_stat_int(self, name: str) -> float:
         """Get the value of an integer statistic
 
         :param name: str
@@ -59,7 +59,7 @@ class SteamUserStats(object):
         """
         return self.steam.GetStatInt(name)
 
-    def ResetAllStats(self, achievements: bool) -> bool:
+    def reset_all_stats(self, achievements: bool) -> bool:
         """Reset all Steam statistics; optional to reset achievements
 
         :param achievements: bool
@@ -67,14 +67,14 @@ class SteamUserStats(object):
         """
         return self.steam.ResetAllStats(achievements)
 
-    def RequestCurrentStats(self) -> bool:
+    def request_current_stats(self) -> bool:
         """Request all statistics and achievements from Steam servers
 
         :return: bool
         """
         return self.steam.RequestCurrentStats()
 
-    def SetAchievement(self, name: str) -> bool:
+    def set_achievement(self, name: str) -> bool:
         """Set a given achievement
 
         :param name: str
@@ -82,7 +82,7 @@ class SteamUserStats(object):
         """
         return self.steam.SetAchievement(name)
 
-    def SetStat(self, name: str, value: object) -> bool:
+    def set_stat(self, name: str, value: object) -> bool:
         """Set a statistic
 
         :param name: str
@@ -98,14 +98,14 @@ class SteamUserStats(object):
         else:
             raise UnsupportedSteamStatValue("SetStat value can be only int or float")
 
-    def StoreStats(self) -> bool:
+    def store_stats(self) -> bool:
         """Store all statistics, and achievements, on Steam servers; must be called to "pop" achievements
 
         :return: bool
         """
         return self.steam.StoreStats()
 
-    def ClearAchievement(self, name: str) -> bool:
+    def clear_achievement(self, name: str) -> bool:
         """Clears a given achievement
 
         :param name: str
@@ -113,7 +113,7 @@ class SteamUserStats(object):
         """
         return self.steam.ClearAchievement(name)
 
-    def SetFindLeaderboardResultCallback(self, callback: object) -> bool:
+    def set_find_leaderboard_result_callback(self, callback: object) -> bool:
         """Set callback for when leaderboard search result becomes available
 
         :param callback: callable
@@ -123,7 +123,7 @@ class SteamUserStats(object):
         self.steam.Leaderboard_SetFindLeaderboardResultCallback(self._LeaderboardFindResult)
         return True
 
-    def FindLeaderboard(self, name: str, callback: object = None, override_callback: bool = False) -> bool:
+    def find_leaderboard(self, name: str, callback: object = None, override_callback: bool = False) -> bool:
         """Find Leaderboard by name
 
         :param name: str
@@ -133,10 +133,10 @@ class SteamUserStats(object):
         """
         if callback:
             if self._LeaderboardFindResult and override_callback:
-                self.SetFindLeaderboardResultCallback(callback)
+                self.set_find_leaderboard_result_callback(callback)
 
         else:
-            self.SetFindLeaderboardResultCallback(callback)
+            self.set_find_leaderboard_result_callback(callback)
 
-        Steam.cdll.Leaderboard_FindLeaderboard(name.encode())
+        self.steam.Leaderboard_FindLeaderboard(name.encode())
         return True

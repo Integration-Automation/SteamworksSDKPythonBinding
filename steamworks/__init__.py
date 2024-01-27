@@ -23,6 +23,7 @@ from steamworks.interfaces.input import SteamInput
 from steamworks.interfaces.matchmaking import SteamMatchmaking
 from steamworks.interfaces.microtxn import SteamMicroTxn
 from steamworks.interfaces.music import SteamMusic
+from steamworks.interfaces.query import SteamUGCQuery
 from steamworks.interfaces.screenshots import SteamScreenshots
 from steamworks.interfaces.users import SteamUsers
 from steamworks.interfaces.userstats import SteamUserStats
@@ -52,17 +53,13 @@ class STEAMWORKS(object):
 
     def _initialize(self) -> bool:
         """Initialize module by loading STEAMWORKS c_library
-
         :return: bool
         """
         platform = sys.platform
         if self._supported_platforms and platform not in self._supported_platforms:
             raise UnsupportedPlatformException(f'"{platform}" has been excluded')
-
         if platform not in STEAMWORKS._native_supported_platforms:
             raise UnsupportedPlatformException(f'"{platform}" is not being supported')
-
-        library_file_name = ''
         if platform in ['linux', 'linux2']:
             library_file_name = 'SteamAPI.so'
             if os.path.isfile(os.path.join(os.getcwd(), 'libsteam_api.so')):
@@ -76,7 +73,7 @@ class STEAMWORKS(object):
             library_file_name = 'SteamAPI.dylib'
 
         elif platform == 'win32':
-            library_file_name = 'SteamAPI64.dll' if STEAMWORKS._arch == Arch.x86 else 'SteamAPI64.dll'
+            library_file_name = 'SteamAPI.dll' if STEAMWORKS._arch == Arch.x86 else 'SteamAPI.dll'
 
         else:
             # This case is theoretically unreachable
@@ -139,6 +136,7 @@ class STEAMWORKS(object):
         self.Workshop = SteamWorkshop(self)
         self.MicroTxn = SteamMicroTxn(self)
         self.Input = SteamInput(self)
+        self.SteamUGCQuery = SteamUGCQuery(self)
 
     def initialize(self) -> bool:
         """Initialize Steam API connection

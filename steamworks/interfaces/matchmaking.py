@@ -7,7 +7,7 @@ class SteamMatchmaking(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def CreateLobby(self, lobby_type: int, max_members: int) -> None:
+    def create_lobby(self, lobby_type: int, max_members: int) -> None:
         """Create a lobby on the Steam servers, if private the lobby will not be returned by any RequestLobbyList() call
 
         :param lobby_type: ELobbyType
@@ -16,7 +16,7 @@ class SteamMatchmaking(object):
         """
         self.steam.CreateLobby(lobby_type, max_members)
 
-    def JoinLobby(self, steam_lobby_id: int) -> None:
+    def join_lobby(self, steam_lobby_id: int) -> None:
         """Join an existing lobby
 
         :param steam_lobby_id: int
@@ -24,7 +24,7 @@ class SteamMatchmaking(object):
         """
         self.steam.JoinLobby(steam_lobby_id)
 
-    def LeaveLobby(self, steam_lobby_id: int) -> None:
+    def leave_lobby(self, steam_lobby_id: int) -> None:
         """Leave a lobby, this will take effect immediately on the client side, other users will be notified by LobbyChatUpdate_t callback
 
         :param steam_lobby_id: int
@@ -34,7 +34,7 @@ class SteamMatchmaking(object):
 
     #
 
-    def InviteUserToLobby(self, steam_lobby_id: int, steam_id: int) -> bool:
+    def invite_user_to_lobby(self, steam_lobby_id: int, steam_id: int) -> bool:
         """Invite another user to the lobby, the target user will receive a LobbyInvite_t callback, will return true if the invite is successfully sent, whether or not the target responds
 
         :param steam_lobby_id: int

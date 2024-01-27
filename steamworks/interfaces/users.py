@@ -8,28 +8,28 @@ class SteamUsers(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def GetSteamID(self) -> int:
+    def get_steam_id(self) -> int:
         """Get user's Steam ID.
 
         :return: int
         """
         return self.steam.GetSteamID()
 
-    def LoggedOn(self) -> bool:
+    def logged_on(self) -> bool:
         """Check, true/false, if user is logged into Steam currently
 
         :return: bool
         """
         return self.steam.LoggedOn()
 
-    def GetPlayerSteamLevel(self) -> int:
+    def get_player_steam_level(self) -> int:
         """Get the user's Steam level.
 
         :return: int
         """
         return self.steam.GetPlayerSteamLevel()
 
-    def GetGameBadgeLevel(self, series: int, foil: int) -> int:
+    def get_game_badge_level(self, series: int, foil: int) -> int:
         """Trading Card badges data access, if you only have one set of cards, the series will be 1.
         # The user has can have two different badges for a series; the regular (max level 5) and the foil (max level 1).
 
@@ -39,9 +39,8 @@ class SteamUsers(object):
         """
         return self.steam.GetGameBadgeLevel(series, foil)
 
-    def GetAuthSessionTicket(self) -> str:
+    def get_auth_session_ticket(self) -> str:
         """Retrieves an authentication ticket. Immediately usable in AuthenticateUserTicket.
-		
 		:return: str
 		"""
         buffer = create_string_buffer(1024)

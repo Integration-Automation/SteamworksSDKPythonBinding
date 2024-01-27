@@ -1,7 +1,3 @@
-/////////////////////////////////////////////////
-//  STEAMWORKSPY - STEAMWORKS FOR PYTHON
-/////////////////////////////////////////////////
-//
 // Modify SW_PY based on operating system and include the proper Steamworks API file
 //
 // Include the Steamworks API header
@@ -1470,6 +1466,13 @@ SW_PY bool SetCloudFileNameFilter(UGCQueryHandle_t handle, const char *pMatchClo
     return SteamUGC()->SetCloudFileNameFilter(handle, pMatchCloudFileName);
 }
 
+SW_PY bool SetMatchAnyTag(UGCQueryHandle_t handle, bool bMatchAnyTag) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->SetMatchAnyTag(handle, bMatchAnyTag);
+}
+
 SW_PY bool SetSearchText(UGCQueryHandle_t handle, const char *pSearchText) {
     if (SteamUGC() == NULL) {
         return false;
@@ -1482,13 +1485,6 @@ SW_PY bool SetRankedByTrendDays(UGCQueryHandle_t handle, uint32 unDays) {
         return false;
     }
     return SteamUGC()->SetRankedByTrendDays(handle, unDays);
-}
-
-SW_PY bool SetMatchAnyTag(UGCQueryHandle_t handle, bool bMatchAnyTag) {
-    if (SteamUGC() == NULL) {
-        return false;
-    }
-    return SteamUGC()->SetMatchAnyTag(handle, bMatchAnyTag);
 }
 
 SW_PY bool AddRequiredTag(UGCQueryHandle_t handle, const char *pTagName) {
@@ -1587,7 +1583,7 @@ SW_PY bool GetQueryUGCResult(UGCQueryHandle_t handle, uint32 index, SteamUGCDeta
     return SteamUGC()->GetQueryUGCResult(handle, index, pDetails);
 }
 
-SW_PY bool ReleaseQueryUGCRequest(UGCQueryHandle_t handle ) {
+SW_PY bool ReleaseQueryUGCRequest(UGCQueryHandle_t handle) {
     if (SteamUGC() == NULL) {
         return false;
     }
@@ -1608,7 +1604,8 @@ SW_PY bool GetQueryUGCMetadata(UGCQueryHandle_t handle, uint32 index, char *pchM
     return SteamUGC()->GetQueryUGCMetadata(handle, index, pchMetadata, cchMetadatasize);
 }
 
-SW_PY bool GetQueryUGCChildren(UGCQueryHandle_t handle, uint32 index, PublishedFileId_t*pvecPublishedFileID, uint32 cMaxEntries) {
+SW_PY bool GetQueryUGCChildren(UGCQueryHandle_t handle, uint32 index,
+                               PublishedFileId_t *pvecPublishedFileID, uint32 cMaxEntries) {
     if (SteamUGC() == NULL) {
         return false;
     }
@@ -1620,6 +1617,41 @@ SW_PY bool GetQueryUGCStatistic(UGCQueryHandle_t handle, uint32 index, EItemStat
         return false;
     }
     return SteamUGC()->GetQueryUGCStatistic(handle, index, eStatType, pStatValue);
+}
+
+SW_PY bool GetQueryUGCAdditionalPreview(
+        UGCQueryHandle_t handle, uint32 index, uint32 previewIndex, char *pchURLOrVideoID, uint32 cchURLSize,
+        char *pchOriginalFileName, uint32 cchOriginalFileNameSize, EItemPreviewType *pPreviewType) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCAdditionalPreview(
+            handle, index, previewIndex, pchURLOrVideoID, cchURLSize,
+            pchOriginalFileName, cchOriginalFileNameSize, pPreviewType);
+}
+
+SW_PY bool GetQueryUGCKeyValueTag(
+        UGCQueryHandle_t handle, uint32 index, uint32 keyValueTagIndex, char *pchKey,
+        uint32 cchKeySize, char *pchValue, uint32 cchValueSize) {
+    if (SteamUGC() == NULL) {
+        return false;
+    }
+    return SteamUGC()->GetQueryUGCKeyValueTag(
+            handle, index, keyValueTagIndex, pchKey, cchKeySize, pchValue, cchValueSize);
+}
+
+SW_PY uint32 GetQueryUGCNumAdditionalPreviews(UGCQueryHandle_t handle, uint32 index){
+    if (SteamUGC() == NULL) {
+        return 0;
+    }
+    return SteamUGC()->GetQueryUGCNumAdditionalPreviews(handle, index);
+}
+
+SW_PY uint32 GetQueryUGCNumKeyValueTags(UGCQueryHandle_t handle, uint32 index) {
+    if (SteamUGC() == NULL) {
+        return 0;
+    }
+    return SteamUGC()->GetQueryUGCNumKeyValueTags(handle, index);
 }
 
 //-----------------------------------------------

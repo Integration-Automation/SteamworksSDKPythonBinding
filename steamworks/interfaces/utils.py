@@ -8,91 +8,91 @@ class SteamUtils(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def OverlayNeedsPresent(self) -> bool:
+    def overlay_needs_present(self) -> bool:
         """Checks if the Overlay needs a present. Only required if using event driven render updates.
 
         :return: bool
         """
         return self.steam.OverlayNeedsPresent()
 
-    def GetAppID(self) -> int:
+    def get_app_id(self) -> int:
         """Get the Steam ID of the running application/game
 
         :return: int
         """
         return self.steam.GetAppID()
 
-    def GetCurrentBatteryPower(self) -> int:
+    def get_current_battery_power(self) -> int:
         """Get the amount of battery power, clearly for laptops
 
         :return: int [0-100] in % / 255 when on ac power
         """
         return self.steam.GetCurrentBatteryPower()
 
-    def GetIPCCallCount(self) -> int:
+    def get_ipc_call_count(self) -> int:
         """Returns the number of IPC calls made since the last time this function was called
 
         :return: int
         """
         return self.steam.GetIPCCallCount()
 
-    def GetIPCountry(self) -> str:
+    def get_ip_country(self) -> str:
         """Get the user's country by IP
 
         :return: str
         """
         return self.steam.GetIPCountry() or ''
 
-    def GetSecondsSinceAppActive(self) -> int:
+    def get_seconds_since_app_active(self) -> int:
         """Return amount of time, in seconds, user has spent in this session
 
         :return: int
         """
         return self.steam.GetSecondsSinceAppActive()
 
-    def GetSecondsSinceComputerActive(self) -> int:
+    def get_seconds_since_computer_active(self) -> int:
         """Returns the number of seconds since the user last moved the mouse
 
         :return: int
         """
         return self.steam.GetSecondsSinceComputerActive()
 
-    def GetServerRealTime(self) -> int:
+    def get_server_real_time(self) -> int:
         """Returns the Steam server time in Unix epoch format. (Number of seconds since Jan 1, 1970 UTC)
 
         :return: int
         """
         return self.steam.GetServerRealTime()
 
-    def GetSteamUILanguage(self) -> str:
+    def get_steam_ui_language(self) -> str:
         """Get the Steam user interface language
 
         :return: str
         """
         return self.steam.GetSteamUILanguage()
 
-    def IsOverlayEnabled(self) -> bool:
+    def is_overlay_enabled(self) -> bool:
         """Returns true/false if Steam overlay is enabled
 
         :return: bool
         """
         return self.steam.IsOverlayEnabled()
 
-    def IsSteamInBigPictureMode(self) -> bool:
+    def is_steam_in_big_picture_mode(self) -> bool:
         """Returns true if Steam & the Steam Overlay are running in Big Picture mode
 
         :return: bool
         """
         return self.steam.IsSteamInBigPictureMode()
 
-    def IsVRHeadsetStreamingEnabled(self) -> bool:
+    def is_vr_headset_streaming_enabled(self) -> bool:
         """Is Steam running in VR
 
         :return: bool
         """
         return self.steam.IsVRHeadsetStreamingEnabled()
 
-    def SetOverlayNotificationInset(self, horizontal: int, vertical: int) -> None:
+    def set_overlay_notification_inset(self, horizontal: int, vertical: int) -> None:
         """Sets the inset of the overlay notification from the corner specified by SetOverlayNotificationPosition
 
         :param horizontal: int
@@ -101,14 +101,14 @@ class SteamUtils(object):
         """
         self.steam.SetOverlayNotificationInset(horizontal, vertical)
 
-    def SetOverlayNotificationPosition(self, position: ENotificationPosition) -> None:
+    def set_overlay_notification_position(self, position: ENotificationPosition) -> None:
         """Set the position where overlay shows notifications
 
         :return: None
         """
         self.steam.SetOverlayNotificationPosition(position)
 
-    def SetVRHeadsetStreamingEnabled(self, enabled: bool) -> None:
+    def set_vr_headset_streaming_enabled(self, enabled: bool) -> None:
         """Set whether the HMD content will be streamed via Steam In-Home Streaming
 
         :param enabled: bool
@@ -117,9 +117,9 @@ class SteamUtils(object):
 
         self.steam.SetVRHeadsetStreamingEnabled(enabled)
 
-    def ShowGamepadTextInput(self, \
-                             input_mode: EGamepadTextInputLineMode, line_input_mode: EGamepadTextInputMode, \
-                             description: str, max_characters: int, preset: str) -> bool:
+    def show_gamepad_text_input(self, \
+                                input_mode: EGamepadTextInputLineMode, line_input_mode: EGamepadTextInputMode, \
+                                description: str, max_characters: int, preset: str) -> bool:
         """Activates the Big Picture text input dialog which only supports gamepad input
 
         :param input_mode: EGamepadTextInputLineMode
@@ -131,7 +131,7 @@ class SteamUtils(object):
         """
         return self.steam.ShowGamepadTextInput(input_mode, line_input_mode, description, max_characters, preset)
 
-    def StartVRDashboard(self) -> None:
+    def start_vr_dashboard(self) -> None:
         """Ask SteamUI to create and render its OpenVR dashboard
 
         :return: None

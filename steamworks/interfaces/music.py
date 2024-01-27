@@ -7,56 +7,56 @@ class SteamMusic(object):
         if not self.steam.loaded():
             raise SteamNotLoadedException('STEAMWORKS not yet loaded')
 
-    def MusicIsEnabled(self) -> bool:
+    def music_is_enabled(self) -> bool:
         """Is Steam music enabled
 
         :return: bool
         """
         return self.steam.MusicIsEnabled()
 
-    def MusicIsPlaying(self) -> bool:
+    def music_is_playing(self) -> bool:
         """Is Steam music playing something
 
         :return: bool
         """
         return self.steam.MusicIsPlaying()
 
-    def MusicGetVolume(self) -> float:
+    def music_get_volume(self) -> float:
         """Get the volume level of the music.
 
         :return: float
         """
         return self.steam.MusicGetVolume()
 
-    def MusicPause(self) -> None:
+    def music_pause(self) -> None:
         """Pause whatever Steam music is playing
 
         :return: None
         """
         self.steam.MusicPause()
 
-    def MusicPlay(self) -> None:
+    def music_play(self) -> None:
         """Play current track/album.
 
         :return: None
         """
         self.steam.MusicPlay()
 
-    def MusicPlayNext(self) -> None:
+    def music_play_next(self) -> None:
         """Play next track/album.
 
         :return: None
         """
         self.steam.MusicPlayNext()
 
-    def MusicPlayPrev(self) -> None:
+    def music_play_prev(self) -> None:
         """Play previous track/album.
 
         :return: None
         """
         self.steam.MusicPlayPrev()
 
-    def MusicSetVolume(self, volume: float) -> None:
+    def music_set_volume(self, volume: float) -> None:
         """Set the volume of Steam music
 
         :param volume: float 0,0 -> 1,0

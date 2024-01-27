@@ -14,4 +14,4 @@
 # Requirements
 * steam_appid.txt - Stating your games app id or any other valid app id given the account owns a license
 * steam_api library (.dll) and the corresponding steam_api.lib
-* SteamworksPy library (.dll)
+* SteamAPI library (.dll)
